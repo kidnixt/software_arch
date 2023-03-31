@@ -5,12 +5,6 @@ const port = 3001;
 const { Pipeline } = require('./pipeline');
 const { sumar, sinIva, impuesto } = require('./filters');
 
-//test app
-app.get("/", (req, res) => {
-    res.send("Hello World!");
-    console.log("Hello World!");
-})
-
 app.get("/autos/ventas/:precios", (req, res) => {
     const precios = req.params.precios;
     const preciosArray = precios.split(",").map(Number);
@@ -23,11 +17,6 @@ app.get("/autos/ventas/:precios", (req, res) => {
 
     const result = pipe.process(preciosArray);
     res.send(`El total de ganancias de las ventas es ${result}, sin IVA y con impuestos aplicados`);
-})
-
-
-app.get("/autos", (req, res) => {
-    res.send("No se ingresaron ventas");
 })
 
 app.listen(port, () => {
