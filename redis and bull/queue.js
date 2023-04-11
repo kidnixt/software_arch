@@ -1,9 +1,6 @@
 const Queue = require('bull');
 const myQueue = new Queue('myQueue');
 
-
-
-
 myQueue.process(async (job, done) => {
     const redis = require('redis');
     const client = redis.createClient();

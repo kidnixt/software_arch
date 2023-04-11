@@ -13,9 +13,7 @@ class Pipeline {
             result = filters(result);
         }
         return result;
-
     }
-
 }
 
 module.exports = { Pipeline };

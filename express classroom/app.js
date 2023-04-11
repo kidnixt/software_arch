@@ -12,8 +12,6 @@ app.get("/weather", (req, res) => {
         res.send({error: "You must provide an address"})
         return;
     }
-
-    
     weather(req.query.address, (error, data) => {
         if(error){
             res.status(500)

@@ -4,12 +4,10 @@ const axios = require('axios');
 
 const API_KEY = "qQLawAOdPaVOwL6AxoYGFy8rWXf8GcBJ";
 
-//obtener el clima utilizando accuweather por nombre de ciudad
 app.get('/clima/:ciudad', (req, res) => {
-    const ciudad = req.params.ciudad;
+    const city = req.params.ciudad;
 
-    //Returns information for an array of cities that match the search text.
-    const url = `http://api.weatherapi.com/v1/current.json?key=73701186c7f5440ea42190836231603&q=${ciudad}&aqi=no`;
+    const url = `http://api.weatherapi.com/v1/current.json?key=73701186c7f5440ea42190836231603&q=${city}&aqi=no`;
     axios.get(url)
         .then(response => {
             const data = response.data;
@@ -19,8 +17,8 @@ app.get('/clima/:ciudad', (req, res) => {
             const humidity = data.current.humidity;
             const condition = data.current.condition.text;
             const wind = data.current.wind_kph;
-            const mensaje = `El clima en ${name} de ${country} es de ${temp}°C, con una humedad de ${humidity}%, con vientos de ${wind}km/h y con condiciones de ${condition}`;
-            res.send(mensaje);
+            const message = `El clima en ${name} de ${country} es de ${temp}°C, con una humedad de ${humidity}%, con vientos de ${wind}km/h y con condiciones de ${condition}`;
+            res.send(message);
         })
         .catch(error => {
             if (error.response) {

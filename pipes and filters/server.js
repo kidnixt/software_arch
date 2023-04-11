@@ -3,19 +3,19 @@ const app = express();
 const port = 3001;  
 
 const { Pipeline } = require('./pipeline');
-const { sumar, sinIva, impuesto } = require('./filters');
+const { addition, withoutIVA, taxes } = require('./filters');
 
 app.get("/autos/ventas/:precios", (req, res) => {
-    const precios = req.params.precios;
-    const preciosArray = precios.split(",").map(Number);
+    const prices = req.params.precios;
+    const pricesArr = prices.split(",").map(Number);
 
 
     var pipe = new Pipeline();
-    pipe.use(sumar);
-    pipe.use(sinIva);
-    pipe.use(impuesto);
+    pipe.use(addition);
+    pipe.use(withoutIVA);
+    pipe.use(taxes);
 
-    const result = pipe.process(preciosArray);
+    const result = pipe.process(pricesArr);
     res.send(`El total de ganancias de las ventas es ${result}, sin IVA y con impuestos aplicados`);
 })
 
